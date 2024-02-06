@@ -32,32 +32,32 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN rm -rf /opt/hostedtoolcache
 
-RUN apt-get update && apt-get install -y wget && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y wget && \
+#	apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# ==================================================================
-# Installing CUDA packages (CUDA Toolkit 12.0 and CUDNN 8.9.7)
-# ------------------------------------------------------------------
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin && \
-    mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600 && \
-    wget https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda-repo-ubuntu2204-12-0-local_12.0.0-525.60.13-1_amd64.deb && \
-    dpkg -i cuda-repo-ubuntu2204-12-0-local_12.0.0-525.60.13-1_amd64.deb && \
-    cp /var/cuda-repo-ubuntu2204-12-0-local/cuda-*-keyring.gpg /usr/share/keyrings/ && \
-    apt-get update && \
-    apt-get install -y cuda && \  
-    rm cuda-repo-ubuntu2204-12-0-local_12.0.0-525.60.13-1_amd64.deb && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+## ==================================================================
+## Installing CUDA packages (CUDA Toolkit 12.0 and CUDNN 8.9.7)
+## ------------------------------------------------------------------
+#RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin && \
+#    mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600 && \
+#    wget https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda-repo-ubuntu2204-12-0-local_12.0.0-525.60.13-1_amd64.deb && \
+#    dpkg -i cuda-repo-ubuntu2204-12-0-local_12.0.0-525.60.13-1_amd64.deb && \
+#    cp /var/cuda-repo-ubuntu2204-12-0-local/cuda-*-keyring.gpg /usr/share/keyrings/ && \
+#    apt-get update && \
+#    apt-get install -y cuda && \  
+#    rm cuda-repo-ubuntu2204-12-0-local_12.0.0-525.60.13-1_amd64.deb && \
+#	apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Installing CUDNN
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub && \
-    add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /" && \
-    apt-get update && \
-    apt-get install -y libcudnn8=8.9.7.29-1+cuda12.2  \
-                     libcudnn8-dev=8.9.7.29-1+cuda12.2 && \
-	apt-get clean && rm -rf /var/lib/apt/lists/*
+## Installing CUDNN
+#RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub && \
+#    add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /" && \
+#    apt-get update && \
+#    apt-get install -y libcudnn8=8.9.7.29-1+cuda12.2  \
+#                     libcudnn8-dev=8.9.7.29-1+cuda12.2 && \
+#	apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ENV PATH=$PATH:/usr/local/cuda/bin
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+#ENV PATH=$PATH:/usr/local/cuda/bin
+#ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
 RUN python3 -m pip install --no-cache-dir jupyterlab jupyter_contrib_nbextensions jupyterlab-git
 

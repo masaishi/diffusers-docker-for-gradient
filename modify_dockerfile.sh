@@ -20,8 +20,6 @@ sed -i '' '/ENV PATH="\/opt\/venv\/bin:\$PATH"/d' "DIFFUSERS"
 sed -i '' '/CMD \["\/bin\/bash"\]/d' "DIFFUSERS"
 
 # Begin constructing the final Dockerfile
-echo "# Combined Dockerfile" > Dockerfile
-echo "# Base image from DIFFUSERS" >> Dockerfile
 cat "DIFFUSERS" >> Dockerfile
 echo "" >> Dockerfile
 
